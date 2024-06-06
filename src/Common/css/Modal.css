@@ -1,0 +1,48 @@
+.boxStyle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: #FFF;
+    border: 2px solid #000;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
+    padding: 16px;
+}
+
+/* box style for show images and other details */
+.boxStyleShowDocument {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    background-color: #FFF;
+    border: 2px solid #000;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.5);
+    padding: 16px;
+}
+
+thead th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+}
+
+@media(max-width : 425px) {
+    .boxStyle {
+        width: 380px;
+    }
+}
+
+@media(max-width : 425px) {
+    .boxStyle {
+        width: 350px;
+    }
+}
+
+@media(max-width : 320px) {
+    .boxStyle {
+        width: 300px;
+    }
+}

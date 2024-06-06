@@ -1,0 +1,22 @@
+.imupcrpopo{
+    height: 480px;
+    overflow: auto;
+    scrollbar-width: thin;
+}
+
+@media (max-width: 991.98px) {
+    .min-sidebar {
+         margin-left: -272px;
+     }
+     .min-sidebar.show {
+          margin-left: 0;
+      }
+   }
+   @media (max-width: 991.98px) {
+    .main-sidebar-header {
+        display: block !important;
+    }
+    .main-sidebar {
+        margin-block-start: 64px;
+    }
+}
