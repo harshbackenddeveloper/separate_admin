@@ -1,6 +1,6 @@
 import Layout from '../Component/Layout';
 import React, { useEffect, useState } from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { toast } from 'react-toastify';
 import '../Common/css/Modal.css';
 import { useNavigate } from 'react-router-dom';
@@ -16,21 +16,30 @@ const AllUserList = () => {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    // const [searchResuk]
+    const [searchResut, setSearchResult] = useState('');
+    const [userStatus, setUserStatus] = useState('');
 
+    const clearAllFilter = () => {
+        setSearchResult('');
+        setUserStatus('');
+        getUserList();
+
+    }
     const getUserList = async () => {
         try {
-            setLoading(true);
-            const userList = await makeApi('post', '/v1/get/users',);
+            // setLoading(true);
+            const userList = await makeApi('post', '/v1/get/users', { serach_key: searchResut, stauts: userStatus });
+            console.log("all user list", userList)
             if (userList.hasError === true) {
                 toast.error(userList.error.message);
             } else {
+                console.log("all user list", userList.data)
                 setUser(userList.data);
             }
         } catch (error) {
             console.log(error);
         } finally {
-            setLoading(false);
+            // setLoading(false);
         }
     };
 
@@ -52,7 +61,7 @@ const AllUserList = () => {
 
     useEffect(() => {
         getUserList();
-    }, []);
+    }, [searchResut, userStatus]);
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
@@ -112,7 +121,34 @@ const AllUserList = () => {
             <div className='main-content app-content'>
                 {loading ? <Loader /> : (
                     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                        <TextField label="search" />
+
+                        <div>
+                            <div>
+                                <TextField label="search" value={searchResut} onChange={(e) => setSearchResult(e.target.value)} />
+                            </div>
+                            <div>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={userStatus}
+                                        label="User Status"
+                                        onChange={(e) => setUserStatus(e.target.value)}
+                                    >
+                                        <MenuItem value={'all'}></MenuItem>
+                                        <MenuItem value={1}>Active</MenuItem>
+                                        <MenuItem value={0}>InActive</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+                            <div>
+                                <Button onClick={() => clearAllFilter()}>Clear filter</Button>
+                            </div>
+                        </div>
+
+
+
                         <TableContainer sx={{ maxHeight: 440 }}>
                             <Table stickyHeader aria-label="sticky table">
                                 <TableHead>

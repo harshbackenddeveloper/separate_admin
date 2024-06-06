@@ -7,7 +7,7 @@ import Loader from '../Common/Loader';
 import { ProperDateFormat, userlocalStorageData } from '../helper/UserToken';
 import ShowDocument from './ShowDocument';
 
-import { TableContainer, Table, TableBody, TableCell, TablePagination, TableRow, TableHead, Paper, Button } from '@mui/material';
+import { TableContainer, Table, TableBody, TableCell, TablePagination, TableRow, TableHead, Paper, Button, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 const AllLinkDetails = () => {
     const { userid } = useParams();
@@ -21,10 +21,19 @@ const AllLinkDetails = () => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
+    const [searchResut, setSearchResult] = useState('');
+    const [userStatus, setUserStatus] = useState('');
+
+    const clearAllFilter = () => {
+        setSearchResult('');
+        setUserStatus('');
+        userLink();
+    }
+
     const getUserLink = async () => {
-        setLoading(true)
+        // setLoading(true)
         try {
-            const response = await makeApi('post', "/v1/admin/getLinkById", { user_id: userid });
+            const response = await makeApi('post', "/v1/admin/getLinkById", { user_id: userid, serach_key: searchResut, stauts: userStatus });
             // console.log("user link respone ", response);
             if (response.hasError === true) {
                 toast.error(response.error.message)
@@ -34,7 +43,7 @@ const AllLinkDetails = () => {
         } catch (error) {
             console.log(error)
         } finally {
-            setLoading(false)
+            // setLoading(false)
         }
     }
 
@@ -76,13 +85,37 @@ const AllLinkDetails = () => {
 
     useEffect(() => {
         getUserLink();
-    }, [])
+    }, [searchResut, userStatus])
     return (
         <>
             <Layout />
             <div className='"main-content app-content'>
                 {loading ? <Loader /> : (
                     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                        <div>
+                            <div>
+                                <TextField label="search" value={searchResut} onChange={(e) => setSearchResult(e.target.value)} />
+                            </div>
+                            <div>
+                                <FormControl fullWidth>
+                                    <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={userStatus}
+                                        label="Age"
+                                        onChange={(e) => setUserStatus(e.target.value)}
+                                    >
+                                        <MenuItem value={'all'}></MenuItem>
+                                        <MenuItem value={1}>Active</MenuItem>
+                                        <MenuItem value={0}>InActive</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+                            <div>
+                                <Button onClick={() => clearAllFilter()}>Clear filter</Button>
+                            </div>
+                        </div>
                         <TableContainer sx={{ maxHeight: 440 }}>
                             <Table stickyHeader aria-label="sticky table">
                                 <TableHead>
