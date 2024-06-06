@@ -106,6 +106,9 @@ const Create_Edit_form = () => {
             const endpoint = names === "create" ? '/v1/createUser' : '/v1/updateUser';
             const response = await makeApi('post', endpoint, formData);
 
+
+            console.log("response", response)
+
             if (response.hasError) {
                 toast.error(response.error.message);
             } else {
