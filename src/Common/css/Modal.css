@@ -33,16 +33,25 @@ thead th {
     .boxStyle {
         width: 380px;
     }
+    .boxStyleShowDocument {
+        width: 380px;
+    }
 }
 
 @media(max-width : 425px) {
     .boxStyle {
         width: 350px;
     }
+    .boxStyleShowDocument {
+        width: 350px;
+    }
 }
 
 @media(max-width : 320px) {
     .boxStyle {
+        width: 300px;
+    }
+    .boxStyleShowDocument {
         width: 300px;
     }
 }

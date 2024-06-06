@@ -1,6 +1,6 @@
 import Layout from '../Component/Layout'
 import React, { useEffect, useState } from 'react'
-import { Box, CardActions, CardContent, Button, TextField, Modal } from '@mui/material';
+import { Box, CardActions, CardContent, Button, TextField, Modal, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@mui/material';
 import '../Common/css/Modal.css'
 import { toast } from 'react-toastify';
 import { makeApi } from '../helper/MakeApi';
@@ -13,6 +13,8 @@ const Department = () => {
     const [departmentName, setDepartmentName] = useState("");
     const [departmentList, setDepartmentList] = useState([])
     const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -57,6 +59,7 @@ const Department = () => {
 
     //function to delete department 
     const deleteDepartment = async (id) => {
+        console.log("id", id)
         try {
             const response = await makeApi("post", "/v1/departmentdestroy", { id: id });
             if (response.hasError === true) {
@@ -69,44 +72,97 @@ const Department = () => {
             console.log(error)
         }
     }
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
+    const rows = departmentList.map((userData, index) => ({
+        ...userData,
+        id: index + 1,
+    }));
+
+    const columns = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'd_name', headerName: 'Deparment Name', width: 200 },
+        // { field: 'Delete', headerName: 'Delete', width: 150 },
+        {
+            field: 'delete',
+            headerName: 'Delete',
+            width: 120,
+            renderCell: (params) => (
+                <Button variant="contained" color="error" onClick={() => deleteDepartment(params.row.id)}>Delete</Button>
+            )
+        }
+    ];
     return (
         <>
             <Layout />
-            <div className='"main-content app-content'>
-                <div className="container-fluid d-flex justify-content-center align-items-center pt-5 flex-column">
-                    <div className="container">
-                        <div className="card p-3   mt-5  shadow-lg border-1 ">
-                            <div className='d-flex justify-content-between align-items-center mb-4'>
-                                <h4 className='fw-bold '>All Department</h4>
-                                <Button sx={{ textAlign: 'end' }} variant="contained" className='text-cend' onClick={handleOpenForm} >Create Department</Button>
-                            </div>
-
-                            {loading ? <Loader /> : (
-                                <div className='imulcrtlist table-responsive'>
-                                    <table className="table table-hover  table-bordered">
-                                        <thead className='table-dark'>
-                                            <tr>
-                                                <th scope="col">S.No</th>
-                                                <th scope="col">Deparment Name</th>
-                                                <th scope="col">Delete</th>
-                                            </tr>
-                                        </thead>
-                                        {departmentList.map((item, index) => (
-                                            <tbody key={index}>
-                                                <tr>
-                                                    <td>{index + 1}</td>
-                                                    <td>{item.d_name}</td>
-                                                    <td><button className='btn btn-danger' onClick={() => deleteDepartment(item.id)}>Delete</button></td>
-                                                </tr>
-                                            </tbody>
-                                        ))}
-                                    </table>
-                                </div>
-                            )}
-
-                        </div>
+            <div className='main-content app-content'>
+                <div className="container-fluid">
+                    <div class="page-header d-flex justify-content-between align-items-center">
+                        <h1 className='page-title'>All Department </h1>
+                        <Button sx={{ textAlign: 'end' }} variant="" className='text-cend btn-primary' onClick={handleOpenForm} >Create Department</Button>
                     </div>
-                </div >
+                    {loading ? <Loader /> :
+                        (
+                            <div className='card custom-card'>
+                                <div class="card-header justify-content-between"> <div class="card-title"> Department List </div> </div>
+                                <div className='card-body'>
+
+                                    <TableContainer sx={{ maxHeight: 440 }}>
+                                        <Table stickyHeader aria-label="sticky table">
+                                            <TableHead>
+                                                <TableRow>
+                                                    {columns.map((column) => (
+                                                        <TableCell
+                                                            key={column.field}
+                                                            align="left"
+                                                            style={{ minWidth: column.width }}
+                                                        >
+                                                            {column.headerName}
+                                                        </TableCell>
+                                                    ))}
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {rows
+                                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                                    .map((row, index) => {
+                                                        return (
+                                                            <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                                                                {columns.map((column) => {
+                                                                    const value = row[column.field];
+                                                                    return (
+                                                                        <TableCell key={column.field} align="left">
+                                                                            {column.renderCell ? column.renderCell({ row }) : value}
+                                                                        </TableCell>
+                                                                    );
+                                                                })}
+                                                            </TableRow>
+                                                        );
+                                                    })}
+                                            </TableBody>
+                                        </Table>
+                                    </TableContainer>
+                                    <TablePagination
+                                        rowsPerPageOptions={[5, 10, 15]}
+                                        component="div"
+                                        count={departmentList.length}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onPageChange={handleChangePage}
+                                        onRowsPerPageChange={handleChangeRowsPerPage}
+                                    />
+                                </div>
+                            </div>
+                        )}
+                </div>
 
                 <Modal open={openDepartmentForm} onClose={handleCloseForm}>
                     <Box className="boxStyle shadow" sx={{ border: '0', borderRadius: '10px' }}>

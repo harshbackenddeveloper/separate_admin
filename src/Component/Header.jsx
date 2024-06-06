@@ -23,7 +23,7 @@ export default function Header({ onToggleSidebar }) {
                         <div className="header-element">
                             <button
                                 aria-label="Hide Sidebar"
-                                className="sidemenu-toggle header-link animated-arrow hor-toggle horizontal-navtoggle border-0"
+                                className="sidemenu-toggle header-link animated-arrow hor-toggle horizontal-navtoggle border-0 d-block d-md-none bg-transparent"
                                 data-bs-toggle="sidebar"
                                 onClick={onToggleSidebar}
                             >

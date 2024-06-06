@@ -120,80 +120,96 @@ const AllUserList = () => {
             <Layout />
             <div className='main-content app-content'>
                 {loading ? <Loader /> : (
-                    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
 
-                        <div>
-                            <div>
-                                <TextField label="search" value={searchResut} onChange={(e) => setSearchResult(e.target.value)} />
-                            </div>
-                            <div>
-                                <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Status</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={userStatus}
-                                        label="User Status"
-                                        onChange={(e) => setUserStatus(e.target.value)}
-                                    >
-                                        <MenuItem value={'all'}></MenuItem>
-                                        <MenuItem value={1}>Active</MenuItem>
-                                        <MenuItem value={0}>InActive</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </div>
-                            <div>
-                                <Button onClick={() => clearAllFilter()}>Clear filter</Button>
+                    <div className='container-fluid'>
+                        <div class="page-header"> <h1 className='page-title'>All User </h1>
+                        <Button sx={{ textAlign: 'end' }} variant="contained" className='text-cend' onClick={() => navigate('/form/create')} >Create_User</Button>
+
+                            {/* <div> 
+                            <ol class="breadcrumb mb-0"> <li class="breadcrumb-item"> <a href="javascript:void(0)">Home</a> </li> 
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard 01</li> </ol> 
+                        </div>  */}
+                        </div>
+                        <div className='card custom-card'>
+                            <div class="card-header justify-content-between"> <div class="card-title"> User List </div> </div>
+
+                            <div className='card-body'>
+                                <div className='row'>
+                                    <div className='col-12 col-md-4 mb-4 mb-sm-0'>
+                                        <TextField className='w-100' label="search" value={searchResut} onChange={(e) => setSearchResult(e.target.value)} />
+                                    </div>
+                                    <div className='col-12 col-md-5 ms-auto'>
+                                        <div className='row'>
+                                            <div className='col-7 col-md-9'>
+                                                <FormControl fullWidth>
+                                                    <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                                                    <Select
+                                                        labelId="demo-simple-select-label"
+                                                        id="demo-simple-select"
+                                                        value={userStatus}
+                                                        label="User Status"
+                                                        onChange={(e) => setUserStatus(e.target.value)}
+                                                    >
+                                                        <MenuItem value={'all'}></MenuItem>
+                                                        <MenuItem value={1}>Active</MenuItem>
+                                                        <MenuItem value={0}>InActive</MenuItem>
+                                                    </Select>
+                                                </FormControl>
+                                            </div>
+                                            <div className='col-5 col-md-3'>
+                                                <Button className='btn btn-primary h-100 btn-sm' onClick={() => clearAllFilter()}>Clear filter</Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <TableContainer sx={{ maxHeight: 440 }}>
+                                    <Table stickyHeader aria-label="sticky table">
+                                        <TableHead>
+                                            <TableRow>
+                                                {columns.map((column) => (
+                                                    <TableCell
+                                                        key={column.field}
+                                                        align="left"
+                                                        style={{ minWidth: column.width }}
+                                                    >
+                                                        {column.headerName}
+                                                    </TableCell>
+                                                ))}
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {rows
+                                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                                .map((row, index) => {
+                                                    return (
+                                                        <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                                                            {columns.map((column) => {
+                                                                const value = row[column.field];
+                                                                return (
+                                                                    <TableCell key={column.field} align="left">
+                                                                        {column.renderCell ? column.renderCell({ row }) : value}
+                                                                    </TableCell>
+                                                                );
+                                                            })}
+                                                        </TableRow>
+                                                    );
+                                                })}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                                <TablePagination
+                                    rowsPerPageOptions={[5, 10, 15]}
+                                    component="div"
+                                    count={user.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onPageChange={handleChangePage}
+                                    onRowsPerPageChange={handleChangeRowsPerPage}
+                                />
                             </div>
                         </div>
-
-
-
-                        <TableContainer sx={{ maxHeight: 440 }}>
-                            <Table stickyHeader aria-label="sticky table">
-                                <TableHead>
-                                    <TableRow>
-                                        {columns.map((column) => (
-                                            <TableCell
-                                                key={column.field}
-                                                align="left"
-                                                style={{ minWidth: column.width }}
-                                            >
-                                                {column.headerName}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows
-                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                        .map((row, index) => {
-                                            return (
-                                                <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                                                    {columns.map((column) => {
-                                                        const value = row[column.field];
-                                                        return (
-                                                            <TableCell key={column.field} align="left">
-                                                                {column.renderCell ? column.renderCell({ row }) : value}
-                                                            </TableCell>
-                                                        );
-                                                    })}
-                                                </TableRow>
-                                            );
-                                        })}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                        <TablePagination
-                            rowsPerPageOptions={[5, 10, 15]}
-                            component="div"
-                            count={user.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
-                    </Paper>
+                    </div>
                 )}
             </div>
         </>

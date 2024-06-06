@@ -3,13 +3,18 @@
     overflow: auto;
     scrollbar-width: thin;
 }
-
+.pagination p {
+    margin-bottom: 0;
+}
 @media (max-width: 991.98px) {
     .min-sidebar {
          margin-left: -272px;
      }
      .min-sidebar.show {
           margin-left: 0;
+      }
+      .main-content {
+          padding-block-start: 3.75rem;
       }
    }
    @media (max-width: 991.98px) {

@@ -66,7 +66,7 @@ const Create_Edit_form = () => {
             const response = await makeApi('post', "/v1/get/getuserbyid", { user_id: names });
             console.log("user response", response.data)
             if (response.hasError === true) {
-                toast.error(response.error.message)
+                // toast.error(response.error.message)
             } else {
                 const user = response.data[0];
                 setUserDetails({
@@ -133,13 +133,17 @@ const Create_Edit_form = () => {
     return (
         <>
             <Layout />
-            <div className='"main-content app-content'>
-                {loadingUpdate ? <Loader /> : (<div className="container-fluid mgulmnbg"  >
-                    <div className="container logign-main-creating" >
+            <div className='main-content app-content'>
+                {loadingUpdate ? <Loader /> : (<div className="container-fluid">
+                <div class="page-header"> {names === "create" ? (<h1 className="page-title my-auto">Create User </h1>) : (<h1 className="page-title my-auto">Edit User </h1>)}
+                    {/* <div> 
+                        <ol class="breadcrumb mb-0"> <li class="breadcrumb-item"> <a href="javascript:void(0)">Home</a> </li> 
+                        <li class="breadcrumb-item active" aria-current="page">Dashboard 01</li> </ol> 
+                    </div>  */}
+                </div>
+                    <div className="" >
                         <div className="col-lg-8  col-xl-6 col-xxl-6 mx-auto">
                             <div className="card p-5 ">
-                                {names === "create" ? (<h3 className=" text-center mb-4 text-primary">Create User </h3>) : (<h3 className=" text-center mb-4 text-primary">Edit User </h3>)}
-
                                 <Formik
                                     initialValues={{
                                         surveyor_or_Firm_name: userDetails.surveyor_or_Firm_name || '',
