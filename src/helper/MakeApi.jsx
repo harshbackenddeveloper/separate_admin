@@ -18,10 +18,10 @@ export const makeApi = async (req, url, body) => {
         const response = await axios(config);
         // console.log("response at make api try", response)
         // console.log("response at make api try", response.data.error.message)
-        if (response.data.error && response.data.error.error_code === 403) {
+        if (response.data.error && response.data.error.message === "Token has expired") {
             sessionStorage.removeItem("token");
             sessionStorage.removeItem("User_Role");
-            window.open('http://localhost:3000/');
+            window.location.href = 'https://sharlinkliveadmin.clientdemobot.com/'
             return;
         } else {
             return response.data;

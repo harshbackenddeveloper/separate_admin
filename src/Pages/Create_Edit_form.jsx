@@ -13,7 +13,7 @@ import * as Yup from 'yup';
 import { makeApi } from '../helper/MakeApi';
 import Loader from '../Common/Loader';
 import Layout from '../Component/Layout';
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Create_Edit_form = () => {
     const { names } = useParams()
@@ -130,10 +130,15 @@ const Create_Edit_form = () => {
         getDetailsById();
     }, []);
 
+    const previousSection = () => {
+        navigate('/alluserlist')
+    }
+
     return (
         <>
             <Layout />
             <div className='main-content app-content'>
+            <button onClick={() => previousSection()}><ArrowBackIcon /></button>
                 {loadingUpdate ? <Loader /> : (<div className="container-fluid">
                 <div class="page-header"> {names === "create" ? (<h1 className="page-title my-auto">Create User </h1>) : (<h1 className="page-title my-auto">Edit User </h1>)}
                     {/* <div> 

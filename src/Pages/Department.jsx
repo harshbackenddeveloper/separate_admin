@@ -5,6 +5,7 @@ import '../Common/css/Modal.css'
 import { toast } from 'react-toastify';
 import { makeApi } from '../helper/MakeApi';
 import Loader from '../Common/Loader';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Department = () => {
     const [openDepartmentForm, setOpenDepartmentForm] = useState(false);
@@ -167,6 +168,7 @@ const Department = () => {
                 <Modal open={openDepartmentForm} onClose={handleCloseForm}>
                     <Box className="boxStyle shadow" sx={{ border: '0', borderRadius: '10px' }}>
                         <h4 className='text-center mb-0'>Create Department</h4>
+                        <button onClick={handleCloseForm} className='btn'  style={{top:"4px", right:"0", color:"#c60e0e", position:"absolute"}}><CloseIcon /></button>
                         <form onSubmit={handleSubmit}>
                             <CardContent>
                                 <TextField label="Department" placeholder="Department" variant="outlined" sx={{ width: '100%', }} id="setDepartmentName" name="setDepartmentName" onChange={(e) => setDepartmentName(e.target.value)} />

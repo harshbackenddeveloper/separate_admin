@@ -9,6 +9,7 @@ import Loader from '../Common/Loader';
 import { ProperDateFormat } from '../helper/UserToken';
 
 import { TableContainer, Table, TableBody, TableCell, TablePagination, TableRow, TableHead, Paper } from '@mui/material';
+import { apiCall } from '../helper/TryCatchCall';
 
 const AllUserList = () => {
     const navigate = useNavigate();
@@ -26,6 +27,10 @@ const AllUserList = () => {
 
     }
     const getUserList = async () => {
+
+        // const data = await apiCall('post', '/v1/get/users', { serach_key: searchResut, stauts: userStatus });
+        // console.log("function for all user list", data)
+
         try {
             // setLoading(true);
             const userList = await makeApi('post', '/v1/get/users', { serach_key: searchResut, stauts: userStatus });
@@ -64,7 +69,7 @@ const AllUserList = () => {
     }, [searchResut, userStatus]);
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'sno', headerName: 'sno', width: 70 },
         { field: 'surveyor_or_Firm_name', headerName: 'Surveyor Or Firm Name', width: 200 },
         { field: 'last_name', headerName: 'Last Name', width: 150 },
         { field: 'mobile', headerName: 'Mobile Number', width: 150 },
@@ -75,9 +80,20 @@ const AllUserList = () => {
             field: 'details',
             headerName: 'Details',
             width: 120,
-            renderCell: (params) => (
-                <Button variant="contained" color="primary" onClick={() => AllDetails(params.row.id)}>Details</Button>
-            )
+            renderCell: (params) => {
+                if (params && params.row && typeof params.row.status !== 'undefined') {
+                    return (
+                        <Button variant="contained" onClick={() => {
+                            if (params.row.link_count >= 0) {
+                                AllDetails(params.row.id)
+                            }
+                        }}
+                            disabled={params.row.link_count <= 0} >
+                            Details
+                        </Button>
+                    )
+                }
+            }
         },
         {
             field: 'edit',
@@ -112,7 +128,7 @@ const AllUserList = () => {
 
     const rows = user.map((userData, index) => ({
         ...userData,
-        id: index + 1, // Calculate serial number starting from 1
+        sno: index + 1, // Calculate serial number starting from 1
     }));
 
     return (
@@ -123,7 +139,7 @@ const AllUserList = () => {
 
                     <div className='container-fluid'>
                         <div class="page-header"> <h1 className='page-title'>All User </h1>
-                        <Button sx={{ textAlign: 'end' }} variant="contained" className='text-cend' onClick={() => navigate('/form/create')} >Create_User</Button>
+                            <Button sx={{ textAlign: 'end' }} variant="contained" className='text-cend' onClick={() => navigate('/form/create')} >Create_User</Button>
 
                             {/* <div> 
                             <ol class="breadcrumb mb-0"> <li class="breadcrumb-item"> <a href="javascript:void(0)">Home</a> </li> 
