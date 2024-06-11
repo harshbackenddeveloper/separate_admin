@@ -1,6 +1,3 @@
-import { Navigate } from "react-router-dom";
-
-
 export const userlocalStorageData = () => {
     const localData = sessionStorage.getItem("token");
     const userRole = sessionStorage.getItem("User_Role");
@@ -21,11 +18,3 @@ export const ProperDateFormat = ({ dateString }) => {
 
     return `${formattedDay}/${formattedMonth}/${year}`;
 };
-
-
-
-export const logoutUser = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("User_Role");
-    return <Navigate to="/" />;
-}

@@ -22,26 +22,25 @@ export default function Sidebar({ showSidebar, handleToggleSidebar }) {
                                 height={24}
                                 viewBox="0 0 24 24"
                             >
-                                {" "}
                                 <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z" />{" "}
                             </svg>
                         </div>
                         <ul className="main-menu">
                             <li className="slide">
                                 <Link to='/dashboard ' className="side-menu__item">
-                                    <i className="fe fe-home side-menu__icon" />
+                                    <i className="fa-solid fa-chart-line side-menu__icon"></i>
                                     <span className="side-menu__label">Dashboard</span>
                                 </Link>
                             </li>
                             <li className="slide">
                                 <Link to='/alluserlist' className="side-menu__item">
-                                    <i className="fe fe-home side-menu__icon" />
+                                    <i className="fa-solid fa-user side-menu__icon"></i>
                                     <span className="side-menu__label">User</span>
                                 </Link>
                             </li>
                             <li className="slide">
                                 <Link to="/department" className="side-menu__item">
-                                    <i className="fe fe-home side-menu__icon" />
+                                    <i className="fa-solid fa-building side-menu__icon"></i>
                                     <span className="side-menu__label">Department</span>
                                 </Link>
                             </li>

@@ -20,7 +20,6 @@ const Create_Edit_form = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [loadingUpdate, setLoadingUpdate] = useState(false)
-
     const [selectedDate, setSelectedDate] = useState(null);
     const [slaExpiryDate, setSlaExpiryDate] = useState("");
     const [clientExpiryDate, setClientExpiryDate] = useState("");
@@ -40,7 +39,6 @@ const Create_Edit_form = () => {
         address: "",
         remark: "",
     });
-
 
     //function to get user department list 
     const getDepartmentList = async () => {
@@ -65,6 +63,7 @@ const Create_Edit_form = () => {
             console.log("namess", names)
             const response = await makeApi('post', "/v1/get/getuserbyid", { user_id: names });
             console.log("user response", response.data)
+            console.log("user response", response.data.password)
             if (response.hasError === true) {
                 // toast.error(response.error.message)
             } else {
@@ -73,7 +72,7 @@ const Create_Edit_form = () => {
                     surveyor_or_Firm_name: user.surveyor_or_Firm_name || "",
                     last_name: user.last_name || "",
                     client_id: user.client_id || "",
-                    password: "",
+                    password: user.password || "",
                     sla_number: user.sla_number || "",
                     iiisla_number: user.iiisla_number || "",
                     link_limit: user.link_limit || "",
@@ -106,9 +105,7 @@ const Create_Edit_form = () => {
             const endpoint = names === "create" ? '/v1/createUser' : '/v1/updateUser';
             const response = await makeApi('post', endpoint, formData);
 
-
             console.log("response", response)
-
             if (response.hasError) {
                 toast.error(response.error.message);
             } else {
@@ -138,14 +135,10 @@ const Create_Edit_form = () => {
         <>
             <Layout />
             <div className='main-content app-content'>
-            <button onClick={() => previousSection()}><ArrowBackIcon /></button>
+                <button onClick={() => previousSection()}><ArrowBackIcon /></button>
                 {loadingUpdate ? <Loader /> : (<div className="container-fluid">
-                <div class="page-header"> {names === "create" ? (<h1 className="page-title my-auto">Create User </h1>) : (<h1 className="page-title my-auto">Edit User </h1>)}
-                    {/* <div> 
-                        <ol class="breadcrumb mb-0"> <li class="breadcrumb-item"> <a href="javascript:void(0)">Home</a> </li> 
-                        <li class="breadcrumb-item active" aria-current="page">Dashboard 01</li> </ol> 
-                    </div>  */}
-                </div>
+                    <div className="page-header"> {names === "create" ? (<h1 className="page-title my-auto">Create User </h1>) : (<h1 className="page-title my-auto">Edit User </h1>)}
+                    </div>
                     <div className="" >
                         <div className="col-lg-8  col-xl-6 col-xxl-6 mx-auto">
                             <div className="card p-5 ">
@@ -365,7 +358,7 @@ const Create_Edit_form = () => {
                                                 <div className="col-lg-6 col-md-6 col-sm-12 mb-1 ">
                                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                                         <DemoContainer components={['DatePicker', 'DatePicker']}>
-                                                            <DatePicker label="Client Expiry Date" variant="outlined" className=' w-100 mb-4' format="DD-MM-YYYY"
+                                                            <DatePicker label="Account Expiry Date" variant="outlined" className=' w-100 mb-4' format="DD-MM-YYYY"
                                                                 name='clientExpiryDate'
                                                                 id="clientExpiryDate"
                                                                 value={clientExpiryDate ? clientExpiryDate : null}

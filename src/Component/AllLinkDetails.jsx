@@ -29,7 +29,7 @@ const AllLinkDetails = () => {
     const clearAllFilter = () => {
         setSearchResult('');
         setUserStatus('');
-        userLink();
+        getUserLink();
     }
 
     const getUserLink = async () => {
@@ -41,7 +41,7 @@ const AllLinkDetails = () => {
             if (searchResut) {
                 LinkList = await makeApi('post', '/v1/admin/getLinkById', { user_id: userid, serach_key: searchResut });
                 setUserLink(LinkList.data)
-            } else if (userStatus === 0) {
+            } else if (userStatus === 0 || userStatus === 1) {
                 LinkList = await makeApi('post', '/v1/admin/getLinkById', { user_id: userid, stauts: userStatus })
                 setUserLink(LinkList.data)
             } else if (searchResut && userStatus) {
@@ -49,20 +49,8 @@ const AllLinkDetails = () => {
                 setUserLink(LinkList.data)
             } else {
                 LinkList = await makeApi('post', '/v1/admin/getLinkById', { user_id: userid, })
-                console.log("lkkjlfkljf", LinkList.error)
                 setUserLink(LinkList.data)
             }
-
-
-            console.log("kfhdsjkfdkfd", LinkList)
-
-            // const response = await makeApi('post', "/v1/admin/getLinkById", { user_id: userid, serach_key: searchResut, stauts: userStatus });
-            // console.log("user link respone ", response);
-            // if (response.hasError === true) {
-            //     // toast.error(response.error.message)
-            // } else {
-            //     // setUserLink(response.data)
-            // }
         } catch (error) {
             console.log(error)
         } finally {
@@ -101,7 +89,6 @@ const AllLinkDetails = () => {
             headerName: 'Show',
             width: 120,
             renderCell: (params) => {
-
                 if (params && params.row && typeof params.row.status !== 'undefined') {
                     return (
                         <Button variant="contained" onClick={() => {
@@ -114,7 +101,6 @@ const AllLinkDetails = () => {
                         </Button>
                     )
                 }
-                // <Button variant="contained" color="primary" onClick={() => showDocument(params.row.id)}>Show</Button>
             }
         },
     ];
@@ -130,7 +116,6 @@ const AllLinkDetails = () => {
         <>
             <Layout />
             <div className='"main-content app-content'>
-
                 {loading ? <Loader /> : (
                     <div className='container-fluid'>
                         <div className="page-header"><h1 className="page-title"><button className='btn' onClick={() => previousSection()}><ArrowBackIcon /></button>All Link </h1></div>
@@ -146,11 +131,9 @@ const AllLinkDetails = () => {
                                             <div className='col-7 col-md-9'>
                                                 <FormControl fullWidth>
                                                     <InputLabel id="demo-simple-select-label">Status</InputLabel>
-                                                    <Select
-                                                        labelId="demo-simple-select-label"
+                                                    <Select labelId="demo-simple-select-label" label="Status"
                                                         id="demo-simple-select"
                                                         value={userStatus}
-                                                        label="Age"
                                                         onChange={(e) => setUserStatus(e.target.value)}
                                                     >
                                                         <MenuItem value={'all'}></MenuItem>
@@ -225,7 +208,6 @@ const AllLinkDetails = () => {
                         />
                     </div>
                 ) : navigate('/')}
-
             </div>
         </>
     )

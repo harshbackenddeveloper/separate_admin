@@ -3,6 +3,7 @@ import Layout from '../Component/Layout'
 import { makeApi } from '../helper/MakeApi'
 import { toast } from 'react-toastify';
 import Loader from '../Common/Loader';
+import { Link } from 'react-router-dom';
 
 export default function Index() {
   const [totalEntry, setTotalEntry] = useState([]);
@@ -39,7 +40,7 @@ export default function Index() {
             <div>
               <ol className="breadcrumb mb-0">
                 <li className="breadcrumb-item">
-                  <a href="javascript:void(0)">Home</a>
+                  <Link to=''>Home</Link>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
                   Dashboard
@@ -63,12 +64,6 @@ export default function Index() {
                       </div>
                     </div>
                   </div>
-                  {/* <span className="text-muted fs-12">
-                    <span className="text-secondary">
-                      <i className="fe fe-arrow-up-circle text-secondary" /> 5%
-                    </span>
-                    Last week
-                  </span> */}
                 </div>
               </div>
             </div>
@@ -87,12 +82,6 @@ export default function Index() {
                       </div>
                     </div>
                   </div>
-                  {/* <span className="text-muted fs-12">
-                    <span className="text-pink">
-                      <i className="fe fe-arrow-down-circle text-pink" /> 0.75%
-                    </span>
-                    Last 6 days
-                  </span> */}
                 </div>
               </div>
             </div>
@@ -111,12 +100,6 @@ export default function Index() {
                       </div>
                     </div>
                   </div>
-                  {/* <span className="text-muted fs-12">
-                    <span className="text-green">
-                      <i className="fe fe-arrow-up-circle text-green" /> 0.9%
-                    </span>
-                    Last 9 days
-                  </span> */}
                 </div>
               </div>
             </div>

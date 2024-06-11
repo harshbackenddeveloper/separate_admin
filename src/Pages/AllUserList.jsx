@@ -7,9 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { makeApi } from '../helper/MakeApi';
 import Loader from '../Common/Loader';
 import { ProperDateFormat } from '../helper/UserToken';
-
 import { TableContainer, Table, TableBody, TableCell, TablePagination, TableRow, TableHead, Paper } from '@mui/material';
-import { apiCall } from '../helper/TryCatchCall';
 
 const AllUserList = () => {
     const navigate = useNavigate();
@@ -27,10 +25,6 @@ const AllUserList = () => {
 
     }
     const getUserList = async () => {
-
-        // const data = await apiCall('post', '/v1/get/users', { serach_key: searchResut, stauts: userStatus });
-        // console.log("function for all user list", data)
-
         try {
             // setLoading(true);
             const userList = await makeApi('post', '/v1/get/users', { serach_key: searchResut, stauts: userStatus });
@@ -138,16 +132,11 @@ const AllUserList = () => {
                 {loading ? <Loader /> : (
 
                     <div className='container-fluid'>
-                        <div class="page-header"> <h1 className='page-title'>All User </h1>
+                        <div className="page-header"> <h1 className='page-title'>All User </h1>
                             <Button sx={{ textAlign: 'end' }} variant="contained" className='text-cend' onClick={() => navigate('/form/create')} >Create_User</Button>
-
-                            {/* <div> 
-                            <ol class="breadcrumb mb-0"> <li class="breadcrumb-item"> <a href="javascript:void(0)">Home</a> </li> 
-                            <li class="breadcrumb-item active" aria-current="page">Dashboard 01</li> </ol> 
-                        </div>  */}
                         </div>
                         <div className='card custom-card'>
-                            <div class="card-header justify-content-between"> <div class="card-title"> User List </div> </div>
+                            <div className="card-header justify-content-between"> <div className="card-title"> User List </div> </div>
 
                             <div className='card-body'>
                                 <div className='row'>
@@ -179,6 +168,7 @@ const AllUserList = () => {
                                     </div>
                                 </div>
 
+                                {/* {user.length > 0 ? ( */}
                                 <TableContainer sx={{ maxHeight: 440 }}>
                                     <Table stickyHeader aria-label="sticky table">
                                         <TableHead>
@@ -214,6 +204,9 @@ const AllUserList = () => {
                                         </TableBody>
                                     </Table>
                                 </TableContainer>
+                                {/* ) : (
+                                    <h1 style={{ color: 'red' }}>Data is not here</h1>
+                                )} */}
                                 <TablePagination
                                     rowsPerPageOptions={[5, 10, 15]}
                                     component="div"

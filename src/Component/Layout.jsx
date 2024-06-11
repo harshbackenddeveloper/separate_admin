@@ -3,7 +3,6 @@ import Header from './Header'
 import Sidebar from './Sidebar'
 
 export default function Layout() {
-
   const [showSidebar, setShowSidebar] = useState(false);
 
   const handleToggleSidebar = () => {

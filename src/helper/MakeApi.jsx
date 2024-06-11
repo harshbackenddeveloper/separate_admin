@@ -1,9 +1,10 @@
 import axios from "axios";
-import { logoutUser, userlocalStorageData } from "./UserToken";
+import { userlocalStorageData } from "./UserToken";
 export const makeApi = async (req, url, body) => {
     const userToken = userlocalStorageData().userToken
 
     const previousUrl = "https://sharelink.clientdemobot.com/api"
+    // const previousUrl = "https://imagebylink.code-x.in/"
     var config = {
         method: req,
         url: previousUrl + url,
@@ -16,18 +17,14 @@ export const makeApi = async (req, url, body) => {
     };
     try {
         const response = await axios(config);
-        // console.log("response at make api try", response)
-        // console.log("response at make api try", response.data.error.message)
         if (response.data.error && response.data.error.message === "Token has expired") {
             sessionStorage.removeItem("token");
             sessionStorage.removeItem("User_Role");
-            window.location.href = 'https://sharlinkliveadmin.clientdemobot.com/'
+            window.location.href = '/'
             return;
         } else {
             return response.data;
         }
-
-        // return response.data;
     } catch (error) {
         console.log("error at catch of make api", error);
         throw error;

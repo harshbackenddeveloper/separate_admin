@@ -30,13 +30,7 @@ export default function Header({ onToggleSidebar }) {
                                 <span />
                             </button>
                         </div>
-                        {/* search icon and text for search */}
-                        {/* <div className="main-header-center  d-none d-lg-block header-link">
-                            <input type="text" className="form-control" id="typehead" placeholder="Search for results..." autoComplete="off" />
-                            <button type="button" aria-label="button" className="btn pe-1">
-                                <i className="fe fe-search" aria-hidden="true" />
-                            </button>
-                        </div> */}
+
                     </div>
                     <div className="header-content-right">
                         <div className="header-element main-profile-user">

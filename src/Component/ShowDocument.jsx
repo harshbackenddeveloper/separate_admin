@@ -36,8 +36,6 @@ const ShowDocument = ({ open, handleClose, id }) => {
         }
     }, [open, id]);
 
-
-
     function formatDate(timestamp) {
         const date = new Date(timestamp);
         const options = { day: '2-digit', month: '2-digit', year: '2-digit' };

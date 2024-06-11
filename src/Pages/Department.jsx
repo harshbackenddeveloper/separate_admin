@@ -91,7 +91,6 @@ const Department = () => {
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
         { field: 'd_name', headerName: 'Deparment Name', width: 200 },
-        // { field: 'Delete', headerName: 'Delete', width: 150 },
         {
             field: 'delete',
             headerName: 'Delete',
@@ -106,14 +105,14 @@ const Department = () => {
             <Layout />
             <div className='main-content app-content'>
                 <div className="container-fluid">
-                    <div class="page-header d-flex justify-content-between align-items-center">
+                    <div className="page-header d-flex justify-content-between align-items-center">
                         <h1 className='page-title'>All Department </h1>
                         <Button sx={{ textAlign: 'end' }} variant="" className='text-cend btn-primary' onClick={handleOpenForm} >Create Department</Button>
                     </div>
                     {loading ? <Loader /> :
                         (
                             <div className='card custom-card'>
-                                <div class="card-header justify-content-between"> <div class="card-title"> Department List </div> </div>
+                                <div className="card-header justify-content-between"> <div className="card-title"> Department List </div> </div>
                                 <div className='card-body'>
 
                                     <TableContainer sx={{ maxHeight: 440 }}>
