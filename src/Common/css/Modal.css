@@ -29,6 +29,7 @@ thead th {
     top: 0px;
 }
 
+
 @media(max-width : 425px) {
     .boxStyle {
         width: 380px;

@@ -91,7 +91,7 @@ const AllLinkDetails = () => {
             renderCell: (params) => {
                 if (params && params.row && typeof params.row.status !== 'undefined') {
                     return (
-                        <Button variant="contained" onClick={() => {
+                        <Button variant="contained" size="small" onClick={() => {
                             if (params.row.status == 1) {
                                 showDocument(params.row.id)
                             }
@@ -115,20 +115,23 @@ const AllLinkDetails = () => {
     return (
         <>
             <Layout />
-            <div className='"main-content app-content'>
+            <div className='main-content app-content'>
                 {loading ? <Loader /> : (
                     <div className='container-fluid'>
-                        <div className="page-header"><h1 className="page-title"><button className='btn' onClick={() => previousSection()}><ArrowBackIcon /></button>All Link </h1></div>
+                        <div className="page-header ">
+                           <Button size="small" variant="outlined"  className='btn btn-primary me-3' onClick={() => previousSection()}><ArrowBackIcon /></Button>
+                           <h1 className="page-title">All Link </h1>
+                        </div>
                         <div className='card custom-card'>
                             <div className="card-header justify-content-between"> <div className="card-title"> All List </div> </div>
                             <div className='card-body'>
-                                <div className='row'>
-                                    <div className='col-12 col-md-4 mb-4 mb-sm-0'>
+                                <div className='row mb-0 mb-md-3'>
+                                    <div className='col-12 col-md-4 mb-4 mb-md-0'>
                                         <TextField className='w-100' label="search" value={searchResut} onChange={(e) => setSearchResult(e.target.value)} />
                                     </div>
                                     <div className='col-12 col-md-5 ms-auto'>
                                         <div className='row'>
-                                            <div className='col-7 col-md-9'>
+                                            <div className='col-12 col-sm-9 mb-4 mb-md-0'>
                                                 <FormControl fullWidth>
                                                     <InputLabel id="demo-simple-select-label">Status</InputLabel>
                                                     <Select labelId="demo-simple-select-label" label="Status"
@@ -142,8 +145,8 @@ const AllLinkDetails = () => {
                                                     </Select>
                                                 </FormControl>
                                             </div>
-                                            <div className='col-5 col-md-3'>
-                                                <Button onClick={() => clearAllFilter()} className='btn-primary h-100'>Clear filter</Button>
+                                            <div className='col-12 col-sm-3'>
+                                                <Button onClick={() => clearAllFilter()} size="small" className='btn-primary mb-3 mb-lg-0'>Clear filter</Button>
                                             </div>
                                         </div>
                                     </div>

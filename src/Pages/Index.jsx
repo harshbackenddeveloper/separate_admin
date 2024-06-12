@@ -50,7 +50,7 @@ export default function Index() {
           </div>
 
           <div className="row">
-            <div className="col-lg-6 col-md-6 col-sm-12 col-xxl-3">
+            <div className="col-lg-6 col-md-6 col-sm-12 col-xxl-4">
               <div className="card overflow-hidden">
                 <div className="card-body">
                   <div className="d-flex">
@@ -60,7 +60,8 @@ export default function Index() {
                     </div>
                     <div className="ms-auto">
                       <div className="chart-wrapper mt-1">
-                        <canvas id="saleschart" className="chart-dropshadow" />
+                        {/* <canvas id="saleschart" className="chart-dropshadow" /> */}
+                        <i className="fa-solid fa-users text-primary fs-3 mt-3"></i>
                       </div>
                     </div>
                   </div>
@@ -68,17 +69,18 @@ export default function Index() {
               </div>
             </div>
 
-            <div className="col-lg-6 col-md-6 col-sm-12 col-xxl-3">
+            <div className="col-lg-6 col-md-6 col-sm-12 col-xxl-4">
               <div className="card overflow-hidden">
                 <div className="card-body">
                   <div className="d-flex">
                     <div className="mt-2">
-                      <h6 className="fw-normal">Active User</h6>
+                      <h6 className="fw-normal ">Active User</h6>
                       <h2 className="mb-0 text-dark fw-semibold">{loading ? <Loader /> : totalEntry.activeusers}</h2>
                     </div>
                     <div className="ms-auto">
                       <div className="chart-wrapper mt-1">
-                        <canvas id="leadschart" className="chart-dropshadow" />
+                        {/* <canvas id="leadschart" className="chart-dropshadow" /> */}
+                        <i className="fa-solid fa-person-arrow-up-from-line text-primary fs-3 mt-3"></i>
                       </div>
                     </div>
                   </div>
@@ -86,7 +88,7 @@ export default function Index() {
               </div>
             </div>
 
-            <div className="col-lg-6 col-md-6 col-sm-12 col-xxl-3">
+            <div className="col-lg-6 col-md-6 col-sm-12 col-xxl-4">
               <div className="card overflow-hidden">
                 <div className="card-body">
                   <div className="d-flex">
@@ -96,7 +98,8 @@ export default function Index() {
                     </div>
                     <div className="ms-auto">
                       <div className="chart-wrapper mt-1">
-                        <canvas id="profitchart" className="chart-dropshadow" />
+                        {/* <canvas id="profitchart" className="chart-dropshadow" /> */}
+                        <i className="fa-solid fa-person-arrow-down-to-line text-primary fs-3 mt-3"></i>
                       </div>
                     </div>
                   </div>

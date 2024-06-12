@@ -96,7 +96,7 @@ const Department = () => {
             headerName: 'Delete',
             width: 120,
             renderCell: (params) => (
-                <Button variant="contained" color="error" onClick={() => deleteDepartment(params.row.id)}>Delete</Button>
+                <Button variant="contained" color="error" size="small" onClick={() => deleteDepartment(params.row.id)}>Delete</Button>
             )
         }
     ];
@@ -107,7 +107,7 @@ const Department = () => {
                 <div className="container-fluid">
                     <div className="page-header d-flex justify-content-between align-items-center">
                         <h1 className='page-title'>All Department </h1>
-                        <Button sx={{ textAlign: 'end' }} variant="" className='text-cend btn-primary' onClick={handleOpenForm} >Create Department</Button>
+                        <Button sx={{ textAlign: 'end' }} variant="contained" size="small" className='text-cend btn-primary' onClick={handleOpenForm} >Create Department</Button>
                     </div>
                     {loading ? <Loader /> :
                         (
@@ -173,7 +173,7 @@ const Department = () => {
                                 <TextField label="Department" placeholder="Department" variant="outlined" sx={{ width: '100%', }} id="setDepartmentName" name="setDepartmentName" onChange={(e) => setDepartmentName(e.target.value)} />
                             </CardContent>
                             <CardActions sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                {loading ? <Loader /> : <Button variant="contained" type='submit'>Create</Button>}
+                                {loading ? <Loader /> : <Button variant="contained" size="small" type='submit'>Create</Button>}
                             </CardActions>
                         </form>
                     </Box>

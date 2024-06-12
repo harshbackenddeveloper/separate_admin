@@ -9,7 +9,7 @@ export default function Sidebar({ showSidebar, handleToggleSidebar }) {
                 <div className="main-sidebar-header">
                     <div className="header-logo d-flex justify-content-between align-items-center ali">
                         <h4 className="fw-bold mb-0 ">Admin</h4>
-                        <button className='cross d-md-none d-block btn' onClick={handleToggleSidebar}>X</button>
+                        <button className='cross d-lg-none d-block btn' onClick={handleToggleSidebar}>X</button>
                     </div>
                 </div>
                 <div className="main-sidebar" id="sidebar-scroll">

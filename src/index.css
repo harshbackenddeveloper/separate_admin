@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.css-10o2lyd-MuiStack-root{
+  padding: 0px 0 0 !important;
+  /* overflow: overlay !important; */
+}

@@ -3,11 +3,9 @@ import { userlocalStorageData } from "./UserToken";
 export const makeApi = async (req, url, body) => {
     const userToken = userlocalStorageData().userToken
 
-    const previousUrl = "https://sharelink.clientdemobot.com/api"
-    // const previousUrl = "https://imagebylink.code-x.in/"
     var config = {
         method: req,
-        url: previousUrl + url,
+        url: process.env.REACT_APP_LiveUrl + url,
         data: body,
         headers: {
             Authorization: `Bearer ${userToken}`,

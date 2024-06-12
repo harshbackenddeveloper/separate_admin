@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import dayjs from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -135,13 +135,14 @@ const Create_Edit_form = () => {
         <>
             <Layout />
             <div className='main-content app-content'>
-                <button onClick={() => previousSection()}><ArrowBackIcon /></button>
+                <Button size="small" variant="outlined" className='btn-primary m-3  m-lg-0' onClick={() => previousSection()}><ArrowBackIcon /></Button>
                 {loadingUpdate ? <Loader /> : (<div className="container-fluid">
-                    <div className="page-header"> {names === "create" ? (<h1 className="page-title my-auto">Create User </h1>) : (<h1 className="page-title my-auto">Edit User </h1>)}
-                    </div>
+                   
                     <div className="" >
-                        <div className="col-lg-8  col-xl-6 col-xxl-6 mx-auto">
+                        <div className="col-lg-10  col-xl-7 col-xxl-6 mx-auto">
                             <div className="card p-5 ">
+                           {names === "create" ? (<h1 className="page-title mx-auto mb-4 mt-0">Create User </h1>) : (<h1 className="page-title mx-auto mb-4 mt-0">Edit User </h1>)}
+                           
                                 <Formik
                                     initialValues={{
                                         surveyor_or_Firm_name: userDetails.surveyor_or_Firm_name || '',
@@ -221,7 +222,6 @@ const Create_Edit_form = () => {
                                                     <ErrorMessage name="mobile" component="div" className="text-danger" />
                                                 </div>
 
-
                                                 <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
                                                     <TextField variant="outlined" className="w-100" label="Email" placeholder="Email"
                                                         name="email"
@@ -258,7 +258,7 @@ const Create_Edit_form = () => {
                                                 <div className="col-lg-6 col-md-6 col-sm-12 mb-1 ">
                                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                                         <DemoContainer components={['DatePicker', 'DatePicker']}>
-                                                            <DatePicker label="Expiry Date" variant="outlined" className=' w-100 mb-4' format="DD-MM-YYYY"
+                                                            <DatePicker label="Expiry Date" variant="outlined" className=' w-100 mb-3 mb-md-1' format="DD-MM-YYYY"
                                                                 name='selectedDate'
                                                                 id="selectedDate"
                                                                 value={selectedDate ? selectedDate : null}
@@ -269,7 +269,7 @@ const Create_Edit_form = () => {
                                                 </div>
 
                                                 <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
-                                                    <TextField variant="outlined" className="w-100" label="SLA Number" placeholder="SLA Number"
+                                                    <TextField variant="outlined" className="w-100 " label="SLA Number" placeholder="SLA Number" style={{zIndex: "999",}}
                                                         name="sla_number"
                                                         id="sla_number"
                                                         value={formik.values.sla_number}
@@ -279,10 +279,10 @@ const Create_Edit_form = () => {
                                                     <ErrorMessage name="sla_number" component="div" className="text-danger" />
                                                 </div>
 
-                                                <div className="col-lg-6 col-md-6 col-sm-12 mb-1">
+                                                <div className="col-lg-6 col-md-6 col-sm-12 mb-0">
                                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                                         <DemoContainer components={['DatePicker', 'DatePicker']}>
-                                                            <DatePicker label="SLA Expiry" variant="outlined" className=' w-100 mb-4' format="DD-MM-YYYY"
+                                                            <DatePicker label="SLA Expiry" variant="outlined" className=' w-100 mb-3 ' format="DD-MM-YYYY"
                                                                 name='slaExpiryDate'
                                                                 id="slaExpiryDate"
                                                                 value={slaExpiryDate ? slaExpiryDate : null}
@@ -302,7 +302,6 @@ const Create_Edit_form = () => {
                                                     />
                                                     <ErrorMessage name="space" component="div" className="text-danger" />
                                                 </div>
-
 
                                                 <div className="col-lg-6 col-md-6 col-sm-12 mb-3">
                                                     <TextField variant="outlined" className="w-100" label="Link Limit" placeholder="Link Limit"
@@ -371,9 +370,9 @@ const Create_Edit_form = () => {
                                             </div>
                                             <div className="col-12 d-flex justify-content-center">
                                                 {names === "create" ? (
-                                                    loading ? (<Loader />) : (<button className="btn btn-primary btn-md btn-block" type="submit">Create User</button>)
+                                                    loading ? (<Loader />) : (<Button size="small" variant="outlined" className="btn btn-primary  btn-block " type="submit">Create User</Button>)
                                                 ) : (
-                                                    loading ? (<Loader />) : (<button className="btn btn-primary btn-md btn-block" type="submit">Update</button>)
+                                                    loading ? (<Loader />) : (<Button size="small" variant="outlined" className="btn btn-primary  btn-block" type="submit">Update</Button>)
                                                 )}
                                             </div>
                                         </Form>
